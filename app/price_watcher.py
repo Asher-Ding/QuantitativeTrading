@@ -1,7 +1,6 @@
 # from Report import AlertSender
 
-from Utils import RequestHandler
-from Utils import send_alert
+from utils import RequestHandler, send_alert
 import time
 
 
