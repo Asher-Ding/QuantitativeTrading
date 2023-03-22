@@ -1,5 +1,5 @@
 # 忽略config文件
-.gitignore .git
+.git
 .venv
 app/config.py
 app/__pycache__
