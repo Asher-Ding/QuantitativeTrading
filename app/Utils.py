@@ -70,7 +70,7 @@ class RequestHandler:
         sign = base64.b64encode(hmac.new(bytes(self.secret_key,encoding='utf-8'),bytes(msg,encoding='utf-8'),digestmod='sha256').digest())
         return sign
 
-    def send_to_sokx(self, method, path, params=None, data=None, json=None, headers=None, **kwargs):
+    def send_to_okx(self, method, path, params=None, data=None, json=None, headers=None, **kwargs):
         """向OKX发送请求
 
         Args:

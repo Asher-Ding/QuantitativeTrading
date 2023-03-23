@@ -1,4 +1,4 @@
-# 请务必保管好的TOKEN
+# 请务必保管好您的个人token
 API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 SECRET_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 PASSPHRASE = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
