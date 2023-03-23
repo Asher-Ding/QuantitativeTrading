@@ -73,9 +73,31 @@ class PriceWatcher:
         else:
             print(response.status_code)
                 # self.send_alert("status_code: " + str(response.status_code))
+                
+    def set_alert(self, watch_coin, alert_price):
+        url = "/api/v5/market/ticker"
+        method = "GET"
+        params = {"instId": watch_coin}
+        
+        # 从okx获取行情数据
+        response = self.request_handler.send_to_okx(method=method, path = url, params=params)
+        
+        data = response.json().get('data')
+        last_price = data[0]["last"]
+        # print(last_price)
+        
+        if last_price > alert_price:
+            self.send_alert(watch_coin+"'s price is "+last_price+" and bid yours"+alert_price)
+            return False
+        else:
+            return True
+            
 if __name__ == '__main__':
     ss = PriceWatcher()
-    ss.watch_price("BTC-USD")
+
+    while ss.set_alert("BTC-USD-SWAP","30000"):
+        print("正在监听你的计划")
+        time.sleep(10)
     # while True:
     #     time.sleep(10)
     #     ss.watch_price("SWAP")
