@@ -6,6 +6,7 @@ import base64
 from config import API_KEY, SECRET_KEY, PASSPHRASE
 from config import OKX_BASE_URL, PUBLIC_URI, PRIVATE_URI
 
+
 class RequestHandler:
     """一个请求处理类
     
