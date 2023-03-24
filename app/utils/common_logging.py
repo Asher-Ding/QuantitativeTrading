@@ -1,4 +1,5 @@
 import logging
+import os
 
 def setup_logging(level=logging.INFO, log_file='logs/logging.log'):
     """
@@ -11,10 +12,21 @@ def setup_logging(level=logging.INFO, log_file='logs/logging.log'):
         logger.info('This is an info-level message')
         logger.warning('This is a warning-level message')
     """
+    
+    # Check if the directory of the logfile is exists, ifnot, create it
+    log_dir = os.path.dirname(log_file)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+        
+    # Now open the log file in write mode; if it doesn't exist, it will be created automaticately
+    if not os.path.exists(log_file):
+        with open(log_file, 'w') as f:
+            f.write('') # create a new log file
+    
     # Log format strings
-    log_format = '%(asctime)s [%(levelname)8s] %(message)s'
+    log_format = '%(asctime)s [%(levelname)s] %(module)s:%(lineno)d - %(message)s'
     date_format = '%Y-%m-%d %H:%M:%S'
-
+    
     # Creating file handler
     file_handler = logging.FileHandler(log_file, mode='a')
     file_handler.setLevel(level)

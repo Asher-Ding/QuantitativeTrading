@@ -1,7 +1,9 @@
 # 忽略config文件
 .git
 .venv
+.DS_Store
 app/config.py
 **/__pycache__
 docs
 wiki
+logs/
