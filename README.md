@@ -7,6 +7,10 @@
 
 ## 安装说明
 
+```python
+python setup.py install 
+```
+
 ## 使用说明
 
 ## 特性&示例

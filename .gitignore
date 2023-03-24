@@ -2,5 +2,6 @@
 .git
 .venv
 app/config.py
-app/__pycache__
+**/__pycache__
 docs
+wiki

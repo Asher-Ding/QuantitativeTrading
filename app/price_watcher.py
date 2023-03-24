@@ -1,6 +1,7 @@
 # from Report import AlertSender
 
-from utils import RequestHandler, send_alert
+from utils.common_utils import RequestHandler, send_alert
+from utils.common_logging import setup_logging
 import time
 
 
@@ -96,6 +97,8 @@ if __name__ == '__main__':
     ss = PriceWatcher()
 
     while ss.set_alert("BTC-USD-SWAP","30000"):
+        logger =  setup_logging()
+        logger.info("this is a test transaction")
         print("正在监听你的计划")
         time.sleep(10)
     # while True:
