@@ -31,6 +31,10 @@ class PriceWatcher:
         self.request_handler = RequestHandler()
         self.send_alert = send_alert
         self.logger = setup_logging()
+        self.watch_list = []
+        
+    def get_watch_list(self):
+        return self.watch_list
 
     # 该方法监测 BTC 价格是否发生剧烈波动，并在变化时调用 AlertSender 对象的 send_alert() 方法发送预警消息。
     def watch_price(self, watch_coin) -> None:
@@ -58,6 +62,7 @@ class PriceWatcher:
         # print(response)
 
         if response.status_code == 200:
+            self.watch_list.append(watch_coin)
             data = response.json()
 
             tick = data.get('data')
@@ -145,3 +150,8 @@ if __name__ == '__main__':
     # while True:
     #     time.sleep(10)
     #     ss.watch_price("SWAP")
+    
+    
+
+
+

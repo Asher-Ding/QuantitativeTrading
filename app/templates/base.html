@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <!-- <img class="h-8 w-8" src=""> -->
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              {% for text, link in navbar_links.items() %}
+              <a href="{{ link }}" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ text }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+      
+{% block content %}{% endblock %}
+</body>
+
+</html>
