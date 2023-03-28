@@ -1,5 +1,6 @@
 ## 项目名称及概述
 
+![](assets/README/img20230328202733.png)
 **暂定项目名称：** Quantitative Trading
 
 **概述：** Quantitative Trading 是一个面向个人的，可扩展的，易于开发和部署的量化交易程序。
@@ -36,6 +37,9 @@ python setup.py install
 2023-03-22: 接入钉钉机器人，对utils进行重新封装
 
 2023-03-23: 新增开发日志功能、新增监听市场剧烈变动的开发需求
+
+2023-03-28: 引入flask和Tailwind框架，搭建基础的前端框架; 新增sqlite数据库，记录日记数据
+
 
 ## 贡献方式
 

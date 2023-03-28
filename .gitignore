@@ -7,3 +7,4 @@ app/config.py
 docs
 wiki
 logs/
+app/database/**
