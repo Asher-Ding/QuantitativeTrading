@@ -3,10 +3,10 @@
 {% block content %}
 <h1 class="text-xl font-bold mb-4">多个输入的页面</h1>
 
-<form action="{{ url_for('diary_submit') }}">
+<form action="{{ url_for('diary_submit') }}" method="POST">
   <div class="mb-4">
-    <label for="time" class="inline-block w-20 font-medium mr-4">时间：</label>
-    <input type="text" id="time" name="time" class="border rounded px-2 py-1 w-56">
+    <label for="date" class="inline-block w-20 font-medium mr-4">时间：</label>
+    <input type="text" id="date" name="date" class="border rounded px-2 py-1 w-56">
   </div>
 
   <div class="mb-4">
@@ -61,8 +61,13 @@
     <input type="text" id="close_price" name="close_price" class="border rounded px-2 py-1 w-56">
   </div>
 
-  <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
-    onclick="onSubmit(event)">提交</button>
+  <div class="mb-4">
+    <label for="remarks" class="inline-block w-20 font-medium mr-4">remarks</label>
+    <input type="text" id="remarks" name="remarks" class="border rounded px-2 py-1 w-56">
+  </div>
+
+  <input type="submit" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
+    onclick="onSubmit(event)">
 </form>
 
 <!-- 弹窗 -->
@@ -85,15 +90,28 @@
 {% block script %}
 <script>
   function onSubmit(event) {
-    console.log(';;;;')
     if (confirm("确认提交？") == false) return false; // 确认提交
 
     event.preventDefault();// 阻止表单默认行为
     
     var successMessageBox = document.getElementById("success-message");
     successMessageBox.classList.remove("hidden");
-    window.location.href = '/diary_submit';
     setTimeout(hideSuccessMessage, 3000); // 隐藏弹窗，时间设定为 3 秒
+
+    const form = event.target.form;
+    const data = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method,
+      body: data,
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 
   function hideSuccessMessage() {
