@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
   <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,8 +18,32 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              {% for text, link in navbar_links.items() %}
-              <a href="{{ link }}" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ text }}</a>
+              {% for title, link in navbar_links.items() %}
+              <!-- In the navbar_links list, the first element in each tuple represents the title , the second element represents the link -->
+              {% if link is mapping %}
+              <!-- If the link is a dictionary, then it is a submenu. -->
+              <div class="relative">
+                <button type="button"
+                  class="dropdown-button px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ title
+                  }}</button>
+                <div class="dropdown-content hidden absolute z-50 py-2 mt-1 w-full bg-white rounded-md shadow-lg">
+                  <div class="ring-1 ring-black ring-opacity-5 overflow-hidden">
+                    <div class="p-2">
+                      {% for subtitle, sublink in link.items() %}
+                      <a href="{{ sublink }}" class="block py-1 text-sm text-gray-700 hover:bg-gray-100 px-2">{{
+                        subtitle }}</a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <!-- Else, the link is not a dictionary, then it is a menu -->
+              <div class="relative">
+                <a href="{{ link }}" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ title
+                  }}</a>
+              </div>
+              {% endif %}
               {% endfor %}
             </div>
           </div>
@@ -25,10 +51,33 @@
       </div>
     </div>
   </nav>
-      
-{% block content %}{% endblock %}
-<!-- 父模板等待子模板填充 -->
-{% block script %}{% endblock %}
+
+
+  {% block content %}{% endblock %}
+  <!-- 父模板等待子模板填充 -->
+  {% block script %}
+  <script>
+    // Add an event listener to the parent menu button
+    const dropdownButton = document.querySelector('.dropdown-button');
+    dropdownButton.addEventListener('click', function () {
+      // Toggle the visibility of the submenu by adding/removing the "hidden" class
+      const dropdownContent = dropdownButton.nextElementSibling;
+      dropdownContent.classList.toggle('hidden');
+
+      // Calculate the position of the submenu and adjust it if necessary
+      const { top, bottom } = dropdownButton.getBoundingClientRect();
+      const dropdownHeight = dropdownContent.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      if (bottom + dropdownHeight > windowHeight) {
+        dropdownContent.style.top = `-${dropdownHeight}px`;
+      } else {
+        dropdownContent.style.top = `${top}px`;
+      }
+    });
+  </script>
+
+  {% endblock %}
 </body>
 
 </html>

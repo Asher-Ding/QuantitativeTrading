@@ -29,11 +29,14 @@ DATABASE = 'app/database/diary.db'
 # Navigation bar links
 navbar_links = {
     'Index': '/',
-    'Diary': '/diary',
+    'Diary': {
+        'View Diary': '/diary',
+        'Diary List': '/diary_list'
+    },
     'Watch': '/watch',
     'Watch List': '/watch_list',
-    'Diary List': '/diary_list'
 }
+
 
 # 通过使用Flask上下文处理函数来自动传递菜单变量，避免每个路由函数都要传递这个变量
 @app.context_processor # 是否可以理解为定义了一个全局变量
@@ -124,6 +127,10 @@ def diary_list():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+# 500 page
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True) 
