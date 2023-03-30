@@ -10,26 +10,19 @@
 @Desc    :   None
 '''
 
-import sys
-for a_path in sys.path:
-    print(a_path)
-
-        
-import unittest
-
+import pytest
 from app.utils.sqlitedb import SqliteDataBase
 
-class TestSqliteDataBase(unittest.TestCase):
-    # 表示前置条件，它在每一个用例执行之前必须会执行一次 
-    def setUp(self):
+class TestSqliteDataBase:
+    # pytest fixture to create database object before each test case.
+    @pytest.fixture(autouse=True)
+    def setup(self):
         self.db = SqliteDataBase('test.db')
         self.db.create_diary_table()
-    
-    # 表示释放资源，它在每次用例执行完之后会执行一次
-    def tearDown(self):
+        yield  # this is use to tear down the database object after each test case.
         self.db.delete('diary', '1=1')
         self.db.__del__()
-        
+
     def test_create_table(self):
         self.db.create_diary_table()
         
@@ -39,24 +32,20 @@ class TestSqliteDataBase(unittest.TestCase):
     def test_select(self):
         self.db.insert_diary('2021-01-01', '100', 'test')
         result = self.db.select('diary', '*', '1=1')
-        self.assertEqual(result[0][0], '2021-01-01')
-        self.assertEqual(result[0][1], '100')
-        self.assertEqual(result[0][2], 'test')
+        assert result[0][0] == '2021-01-01'
+        assert result[0][1] == '100'
+        assert result[0][2] == 'test'
         
     def test_update(self):
         self.db.insert_diary('2021-01-01', '100', 'test')
         self.db.update('diary', 'price', '200', '1=1')
         result = self.db.select('diary', '*', '1=1')
-        self.assertEqual(result[0][0], '2021-01-01')
-        self.assertEqual(result[0][1], '200')
-        self.assertEqual(result[0][2], 'test')
+        assert result[0][0] == '2021-01-01'
+        assert result[0][1] == '200'
+        assert result[0][2] == 'test'
         
     def test_delete(self):
         self.db.insert_diary('2021-01-01', '100', 'test')
         self.db.delete('diary', '1=1')
         result = self.db.select('diary', '*', '1=1')
-        self.assertEqual(len(result), 0)
-        
-if __name__ == '__main__':
-    unittest.main()
-    print('ok')
+        assert len(result) == 0

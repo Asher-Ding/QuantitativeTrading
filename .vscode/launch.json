@@ -12,7 +12,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "envFile": "${workspaceFolder}/.env",
-            "env": {"PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"}
+            "env": {"PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"}
         },
         {
             "name": "Python: Flask",

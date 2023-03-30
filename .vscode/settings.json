@@ -1,4 +1,4 @@
-{
+{   
     "python.formatting.provider": "black",
     "python.envFile": "${workspaceFolder}/.env",
     "python.testing.pytestEnabled": true,
@@ -13,4 +13,8 @@
         "PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"
     },
     "files.autoSave": "afterDelay",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
 }
