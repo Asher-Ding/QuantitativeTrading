@@ -60,3 +60,4 @@ class SqliteDataBase:
     # insert diary to table 'diary'
     def insert_diary(self, date, price, remarks):
         self.insert('diary', 'date, price, remarks', f"'{date}', {price}, '{remarks}'")
+    
