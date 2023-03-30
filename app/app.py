@@ -13,8 +13,14 @@
 from flask import Flask, render_template, request, redirect
 from .price_watcher import PriceWatcher
 from .utils.sqlitedb import SqliteDataBase
+from blueprints import diary_blueprint, watch_blueprint
 
 app = Flask(__name__)
+
+# Register blueprints
+app.register_blueprint(diary_blueprint)
+app.register_blueprint(watch_blueprint)
+
 
 price_watcher = PriceWatcher()
 
