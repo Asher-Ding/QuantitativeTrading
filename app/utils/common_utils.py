@@ -15,8 +15,8 @@ import requests
 import json
 import hmac
 import base64
-from ..config import API_KEY, SECRET_KEY, PASSPHRASE
-from ..config import OKX_BASE_URL, PUBLIC_URI, PRIVATE_URI
+from app.config import API_KEY, SECRET_KEY, PASSPHRASE
+from app.config import OKX_BASE_URL, PUBLIC_URI, PRIVATE_URI
 
 
 class RequestHandler:

@@ -11,8 +11,8 @@
 '''
 
 from flask import Flask, render_template, request, redirect
-from .price_watcher import PriceWatcher
-from .utils.sqlitedb import SqliteDataBase
+# from price_watcher import PriceWatcher
+from utils.sqlitedb import SqliteDataBase
 from blueprints import diary_blueprint, watch_blueprint
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ app.register_blueprint(diary_blueprint)
 app.register_blueprint(watch_blueprint)
 
 
-price_watcher = PriceWatcher()
+# price_watcher = PriceWatcher()
 
 DATABASE = 'app/database/diary.db'
 
@@ -35,16 +35,21 @@ navbar_links = {
     'Diary List': '/diary_list'
 }
 
+# 通过使用Flask上下文处理函数来自动传递菜单变量，避免每个路由函数都要传递这个变量
+@app.context_processor # 是否可以理解为定义了一个全局变量
+def inject_navbar_links():
+    return dict(navbar_links=navbar_links)
+
 @app.route('/')
 def index():
-    return render_template('index.html',navbar_links=navbar_links)
+    return render_template('index.html')
 
 @app.route('/watch', methods=['GET'])
 def watch():
     crypto = request.args.get('crypto')
-    price_watcher.watch_price(crypto)
+    # price_watcher.watch_price(crypto)
     # return "You are now watcing "+crypto
-    return render_template('watch.html',navbar_links=navbar_links)
+    return render_template('watch.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -56,8 +61,8 @@ def submit():
 
 @app.route('/watch_list')
 def watch_list():
-    watch_list = price_watcher.get_watch_list()
-    return render_template('watch_list.html', watch_list=watch_list,navbar_links=navbar_links)
+    # watch_list = price_watcher.get_watch_list()
+    return render_template('watch_list.html', watch_list=watch_list)
 
 
 # diary page
@@ -65,7 +70,7 @@ def watch_list():
 def diary():
     # TODO: 定义日记的模版，然后在这里调用
     print('diary page')
-    return render_template('diary.html',navbar_links=navbar_links)
+    return render_template('diary.html')
 
 # diary submit page
 @app.route('/diary_submit',methods=['POST'])
@@ -110,14 +115,14 @@ def diary_list():
     total_pages = len(diaries) // per_page + (len(diaries) % per_page != 0)
     
     # Render template
-    return render_template("diary_list.html",navbar_links=navbar_links,  diaries=diaries_on_page, current_page=page, total_pages=total_pages) 
+    return render_template("diary_list.html",  diaries=diaries_on_page, current_page=page, total_pages=total_pages) 
 
 
 
 # 404 page
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html',navbar_links=navbar_links), 404
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
