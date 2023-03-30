@@ -1,10 +1,23 @@
-# 忽略config文件
-.git
-.venv
 .DS_Store
-app/config.py
-**/__pycache__
+*.pyc
+__pycache__
+dist
+build
 docs
+docs/build
+docs/source/reference/services
+
+# virtualenv names
+.venv
+
+# important: config
+app/config.py
+
+# wiki
 wiki
+
+# logs
 logs/
+
+# database
 app/database/**

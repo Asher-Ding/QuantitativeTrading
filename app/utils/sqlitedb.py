@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*-coding:utf-8 -*-
+'''
+@File    :   sqlitedb.py
+@Time    :   2023/03/29 14:26:38
+@Author  :   Asher Ding 
+@Version :   0.1.0
+@Contact :   asherding@icloud.com
+@License :   (C)Copyright 2023-2023, Asher Ding
+@Desc    :   None
+'''
+
 import sqlite3
 
 class SqliteDataBase:
@@ -43,4 +55,8 @@ class SqliteDataBase:
     
     # create table named 'diary'
     def create_diary_table(self):
-        self.create_table('diary', 'date text, price real, remarks text')
+        self.create_table('diary', 'date TEXT, price TEXT, remarks TEXT')
+        
+    # insert diary to table 'diary'
+    def insert_diary(self, date, price, remarks):
+        self.insert('diary', 'date, price, remarks', f"'{date}', {price}, '{remarks}'")

@@ -53,9 +53,33 @@ python setup.py install
 - [ ] ...
 - [ ] 优化代码组织结构，组织代码的方法是，每个子文件夹都可以为单独的Git仓库，然后通过Git Submodule指向主目录下的文件。这样设计的优点是，使每个服务可以单独开发、调试和部署，同时有助于跨团队合作管理
 
+
+文档结构参考
+
+```bash
+── data
+│   └── data_file
+├── MANIFEST.in
+├── README.rst
+├── sample
+│   ├── __init__.py
+│   └── package_data.dat
+├── setup.cfg
+├── setup.py
+└── tests
+    ├── __init__.py
+    └── test_simple.py
+```
+
 ## 相关资源
+[如何打包. 官方文档](https://packaging.python.org/en/latest/)
 
 ## 社区
 
 ## 版权声明
+
+## 经验教训文档
+使用venv创建虚拟环境，并通过`__VENV_DIR__`指定虚拟环境的路径
+[venv](https://docs.python.org/3/library/venv.html)
+
 

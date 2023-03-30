@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*-coding:utf-8 -*-
+'''
+@File    :   common_logging.py
+@Time    :   2023/03/29 14:26:52
+@Author  :   Asher Ding 
+@Version :   0.1.0
+@Contact :   asherding@icloud.com
+@License :   (C)Copyright 2023-2023, Asher Ding
+@Desc    :   None
+'''
+
 import logging
 import os
 
