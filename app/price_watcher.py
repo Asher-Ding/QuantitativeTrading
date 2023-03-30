@@ -12,8 +12,8 @@
 
 # from Report import AlertSender
 
-from utils.common_utils import RequestHandler, send_alert
-from utils.common_logging import setup_logging
+from .utils.common_utils import RequestHandler, send_alert
+from .utils.common_logging import setup_logging
 import time
 
 # 监控市场行情

@@ -10,7 +10,11 @@ import time
 
 from utils.sqlitedb import SqliteDataBase
 
-db = SqliteDataBase('app/database/diary.db')
-db.create_diary_table()
-print('diray table created')
+import sys
+for a_path in sys.path:
+    print(a_path)
+
+# db = SqliteDataBase('app/database/diary.db')
+# db.create_diary_table()
+# print('diray table created')
 

@@ -11,8 +11,8 @@
 '''
 
 from flask import Flask, render_template, request, redirect
-from price_watcher import PriceWatcher
-from utils.sqlitedb import SqliteDataBase
+from .price_watcher import PriceWatcher
+from .utils.sqlitedb import SqliteDataBase
 
 app = Flask(__name__)
 

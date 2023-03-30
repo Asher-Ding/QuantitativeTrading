@@ -1,4 +1,22 @@
+#!/usr/bin/env python
+# -*-coding:utf-8 -*-
+'''
+@File    :   test_sqlitedb.py
+@Time    :   2023/03/30 16:55:54
+@Author  :   Asher Ding 
+@Version :   0.1.0
+@Contact :   asherding@icloud.com
+@License :   (C)Copyright 2023-2023, Asher Ding
+@Desc    :   None
+'''
+
+import sys
+for a_path in sys.path:
+    print(a_path)
+
+        
 import unittest
+
 from app.utils.sqlitedb import SqliteDataBase
 
 class TestSqliteDataBase(unittest.TestCase):
@@ -41,3 +59,4 @@ class TestSqliteDataBase(unittest.TestCase):
         
 if __name__ == '__main__':
     unittest.main()
+    print('ok')

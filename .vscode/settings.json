@@ -1,7 +1,16 @@
 {
     "python.formatting.provider": "black",
     "python.envFile": "${workspaceFolder}/.env",
+    "python.testing.pytestEnabled": true,
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"
+    },
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder};${env:PYTHONPATH}"
+        // 在Windows系统中，环境变量之间应当使用分号（;）进行分隔
+    },
     "terminal.integrated.env.linux": {
-        "PYTHONPATH": "${workspaceFolder}"
-    }
+        "PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"
+    },
+    "files.autoSave": "afterDelay",
 }

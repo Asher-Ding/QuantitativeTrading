@@ -29,18 +29,6 @@ python setup.py install
 高可配置型：能够方便地修改、添加和删除策略
 兼容性：支持OKX交易所
 
-## 更新日志
-
-### v0.1.0(2023-03-15)
-2023-03-15: 初始化版本
-
-2023-03-22: 接入钉钉机器人，对utils进行重新封装
-
-2023-03-23: 新增开发日志功能、新增监听市场剧烈变动的开发需求
-
-2023-03-28: 引入flask和Tailwind框架，搭建基础的前端框架; 新增sqlite数据库，记录日记数据
-
-
 ## 贡献方式
 
 ## 计划&路线图
@@ -83,3 +71,26 @@ python setup.py install
 [venv](https://docs.python.org/3/library/venv.html)
 
 
+新增 .env 和 settings.json 文件，用于存放配置信息，使得可以在vscode中导入python包
+[Import Python modules from workspace files](https://learn.microsoft.com/en-us/azure/databricks/delta-live-tables/import-workspace-files)
+
+VScode中使用python的虚拟环境，配置PYTHONPATH，使得可以在vscode中导入python包
+修改setting.json文件，添加如下配置
+```json
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"
+    },
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder};${env:PYTHONPATH}"
+        // 在Windows系统中，环境变量之间应当使用分号（;）进行分隔
+    },
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}${env:PYTHONPATH}"
+    },
+```
+**注意**
+在Windows系统中，环境变量之间应当使用分号（;）进行分隔，例如C:\Program Files\Python3;C:\Program Files\Java\bin。在这种情况下，分号是必需的，并且不会造成影响。
+
+但是，在某些情况下，在环境变量末尾添加一个额外的分号（如C:\Program Files\Python3;C:\Program Files\Java\bin;）可能会导致问题。例如，如果你将该路径添加到了你的 PYTHONPATH 环境变量中，则 Python 解释器可能无法找到你想要的模块。
+
+因此，为避免这样的问题，请确保在设置环境变量时，不要在环境变量的末尾包含多余的分号
