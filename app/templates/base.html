@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="../static/css/style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- TODO 当cdn失效时，无法切换本地css -->
+  <script src="https://cdn.tailwindcss.com" onerror="this.onerror=null;this.src='../static/css/tailwind-local.css'" ></script>
 </head>
 
 <body>

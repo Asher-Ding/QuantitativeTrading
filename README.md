@@ -20,6 +20,12 @@
 
 ## 安装说明
 
+克隆本项目
+
+```bash
+git clone --recursive https://github.com/Asher-Ding/QuantitativeTrading.git
+```
+
 ```python
 python setup.py install 
 ```
