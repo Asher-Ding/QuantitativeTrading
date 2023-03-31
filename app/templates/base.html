@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-<!-- TODO 当cdn失效时，无法切换本地css -->
-  <script src="https://cdn.tailwindcss.com" onerror="this.onerror=null;this.src='../static/css/tailwind-local.css'" ></script>
+  <!-- TODO 当cdn失效时，无法切换本地css -->
+  <script src="https://cdn.tailwindcss.com"
+    onerror="this.onerror=null;this.src='../static/css/tailwind-local.css'"></script>
 </head>
 
 <body>
@@ -23,14 +24,27 @@
               {% if link is mapping %}
               <!-- If the link is a dictionary, then it is a submenu. -->
               <div class="relative">
+                <!-- 触发下拉菜单的元素 -->
                 <button type="button"
-                  class="dropdown-button px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ title
-                  }}</button>
-                <div class="dropdown-content hidden absolute z-50 py-2 mt-1 w-full bg-white rounded-md shadow-lg">
-                  <div class="ring-1 ring-black ring-opacity-5 overflow-hidden">
-                    <div class="p-2">
+                  class="inline-flex justify-center w-full dropdown-button px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{
+                  title
+                  }}
+                  <!-- 向下箭头图标 -->
+                  <svg class="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M10.293 14.293a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L11 12.586V3a1 1 0 00-2 0v9.586l-2.293-2.293a1 1 0 10-1.414 1.414l4 4z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </button>
+
+                <!-- The submenu is hidden by default. -->
+                <div class="group dropdown-content hidden absolute  z-50 y-10 py-2 mt-1  bg-white rounded-md shadow-lg transition duration-1000 ease-in-out">
+                  <div class="ring-1 ring-black ring-opacity-5">
+                    <div class="p-2 flex flex-wrap w-full">
                       {% for subtitle, sublink in link.items() %}
-                      <a href="{{ sublink }}" class="block py-1 text-sm text-gray-700 hover:bg-gray-100 px-2">{{
+                      <!-- The submenu is a list of links. -->
+                      <a href="{{ sublink }}"
+                        class="block py-1 text-sm text-gray-700 hover:bg-gray-100 px-2 whitespace-nowrap">{{
                         subtitle }}</a>
                       {% endfor %}
                     </div>
@@ -56,27 +70,16 @@
   {% block content %}{% endblock %}
   <!-- 父模板等待子模板填充 -->
   {% block script %}
-  <script>
-    // Add an event listener to the parent menu button
-    const dropdownButton = document.querySelector('.dropdown-button');
-    dropdownButton.addEventListener('click', function () {
-      // Toggle the visibility of the submenu by adding/removing the "hidden" class
-      const dropdownContent = dropdownButton.nextElementSibling;
-      dropdownContent.classList.toggle('hidden');
 
-      // Calculate the position of the submenu and adjust it if necessary
-      const { top, bottom } = dropdownButton.getBoundingClientRect();
-      const dropdownHeight = dropdownContent.offsetHeight;
-      const windowHeight = window.innerHeight;
 
-      if (bottom + dropdownHeight > windowHeight) {
-        dropdownContent.style.top = `-${dropdownHeight}px`;
-      } else {
-        dropdownContent.style.top = `${top}px`;
-      }
-    });
-  </script>
-
+  {% endblock %}
+  {% block style %}
+  <style>
+    .relative:hover .hidden,
+    .group:hover .hidden {
+      display: block;
+    }
+  </style>
   {% endblock %}
 </body>
 
