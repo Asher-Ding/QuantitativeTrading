@@ -1,5 +1,7 @@
 ## 项目名称及概述
 
+[查看WIKI](https://github.com/Asher-Ding/QuantitativeTrading/wiki)
+
 ![](assets/README/img20230328202733.png)
 **暂定项目名称：** Quantitative Trading
 
