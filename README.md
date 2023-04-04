@@ -29,7 +29,7 @@ git clone --recursive https://github.com/Asher-Ding/QuantitativeTrading.git
 安装依赖
 
 ```bash
-npx tailwindcss-cli@latest build ./app/static/css/tailwind.css -o ./app/static/css/style.css
+npx tailwindcss-cli@latest build -i ./app/static/css/tailwind.css -o ./app/static/css/style.css
 ```
 
 ```python

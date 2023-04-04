@@ -4,64 +4,85 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-  <!-- TODO 当cdn失效时，无法切换本地css -->
-  <script src="https://cdn.tailwindcss.com"
-    onerror="this.onerror=null;this.src='../static/css/tailwind-local.css'"></script>
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
   <nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <!-- <img class="h-8 w-8" src=""> -->
+    <div class="mx-auto px-4">
+      <div class="flex justify-between">
+        <div class="flex space-x-4">
+          <div>
+            <!-- Logo -->
+            <a href="/" class="flex items-center py-4 px-2 text-white">
+              <svg class="h-6 w-6 mr-2" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm5.656 5.656l-1.414 1.414c1.663 1.663 1.663 4.369 0 6.031-1.663 1.663-4.369 1.663-6.031 0l-1.414 1.414c2.482 2.482 6.517 2.482 9 0 2.481-2.482 2.481-6.518 0-9z" />
+              </svg>
+              <span class="font-semibold text-xl tracking-tight">My Website</span>
+            </a>
           </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              {% for title, link in navbar_links.items() %}
-              <!-- In the navbar_links list, the first element in each tuple represents the title , the second element represents the link -->
+          <div class="hidden md:flex items-center space-x-1">
+            <!-- Navigation Links -->
+            {% for text, link in navbar_links.items() %}
+            <div class="relative">
               {% if link is mapping %}
-              <!-- If the link is a dictionary, then it is a submenu. -->
-              <div class="relative">
-                <!-- 触发下拉菜单的元素 -->
-                <button type="button"
-                  class="inline-flex justify-center w-full dropdown-button px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{
-                  title
-                  }}
-                  <!-- 向下箭头图标 -->
-                  <svg class="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd"
-                      d="M10.293 14.293a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L11 12.586V3a1 1 0 00-2 0v9.586l-2.293-2.293a1 1 0 10-1.414 1.414l4 4z"
-                      clip-rule="evenodd" />
-                  </svg>
-                </button>
-
-                <!-- The submenu is hidden by default. -->
-                <div class="group dropdown-content hidden absolute  z-50 y-10 py-2 mt-1  bg-white rounded-md shadow-lg transition duration-1000 ease-in-out">
-                  <div class="ring-1 ring-black ring-opacity-5">
-                    <div class="p-2 flex flex-wrap w-full">
-                      {% for subtitle, sublink in link.items() %}
-                      <!-- The submenu is a list of links. -->
-                      <a href="{{ sublink }}"
-                        class="block py-1 text-sm text-gray-700 hover:bg-gray-100 px-2 whitespace-nowrap">{{
-                        subtitle }}</a>
-                      {% endfor %}
-                    </div>
-                  </div>
-                </div>
+              <button
+                class="flex items-center py-4 px-2 text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                aria-haspopup="true" aria-expanded="false">
+                <span>{{ text }}</span>
+                <svg class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" />
+                </svg>
+              </button>
+              <!-- Dropdown Menu -->
+              <div class="absolute z-10 hidden group-hover:block bg-gray-800 text-white py-1">
+                {% for subtext, sublink in link.items() %}
+                <a href="{{ sublink }}" class="block px-4 py-2 hover:bg-gray-700">{{ subtext }}</a>
+                {% endfor %}
               </div>
               {% else %}
-              <!-- Else, the link is not a dictionary, then it is a menu -->
-              <div class="relative">
-                <a href="{{ link }}" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900">{{ title
-                  }}</a>
-              </div>
+              <a href="{{ link }}" class="py-4 px-2 text-white hover:bg-gray-700">{{ text }}</a>
               {% endif %}
-              {% endfor %}
             </div>
+            {% endfor %}
           </div>
         </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button class="outline-none mobile-menu-button">
+            <svg class=" w-6 h-6 text-white" x-show="!showMenu" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="hidden mobile-menu">
+        {% for text, link in navbar_links.items() %}
+        <div class="pt-2 pb-3 space-y-1">
+          {% if link is mapping %}
+          <button class="flex items-center justify-between w-full py-2 text-white hover:bg-gray-700 focus:outline-none"
+            aria-haspopup="true" aria-expanded="false">
+            <span>{{ text }}</span>
+            <svg class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div class="hidden pl-4">
+            {% for subtext, sublink in link.items() %}
+            <a href="{{ sublink }}" class="block py-2 text-gray-300 hover:text-white">{{ subtext }}</a>
+            {% endfor %}
+          </div>
+          {% else %}
+          <a href="{{ link }}" class="block py-2 text-white font-medium hover:bg-gray-700">{{ text }}</a>
+          {% endif %}
+        </div>
+        {% endfor %}
       </div>
     </div>
   </nav>
@@ -70,16 +91,45 @@
   {% block content %}{% endblock %}
   <!-- 父模板等待子模板填充 -->
   {% block script %}
+  <script>
+    // Dropdown menu
+    const dropdownButtons = document.querySelectorAll(".relative");
 
+    dropdownButtons.forEach((button) => {
+      button.addEventListener("mouseenter", () => {
+        const dropdownMenu = button.querySelector(".absolute");
+        dropdownMenu.classList.remove("hidden");
+      });
+
+      button.addEventListener("mouseleave", () => {
+        const dropdownMenu = button.querySelector(".absolute");
+        setTimeout(() => {
+          dropdownMenu.classList.add("hidden");
+        }, 500);
+      });
+    });
+    // Toggle mobile menu
+    const mobileMenuButton = document.querySelector(".mobile-menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    mobileMenuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    // Toggle mobile menu and submenu
+    const mobileMenuButtons = document.querySelectorAll(".mobile-menu button");
+
+    mobileMenuButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const submenu = button.nextElementSibling;
+        submenu.classList.toggle("hidden");
+      });
+    });
+
+
+  </script>
 
   {% endblock %}
   {% block style %}
-  <style>
-    .relative:hover .hidden,
-    .group:hover .hidden {
-      display: block;
-    }
-  </style>
   {% endblock %}
 </body>
 

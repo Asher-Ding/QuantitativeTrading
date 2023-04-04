@@ -33,9 +33,9 @@ navbar_links = {
         'View Diary': '/diary',
         'Diary List': '/diary_list'
     },
-    'alert': {
-        'alert': '/alert',
-        'alert List': '/alert_list'
+    'Alert': {
+        'Alert': '/alert',
+        'Alert List': '/alert_list'
     }
 }
 
