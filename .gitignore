@@ -21,3 +21,6 @@ app/database/**
 
 # node_modules
 node_modules
+
+# style.css is generated from tailwind.css
+app/static/css/style.css
