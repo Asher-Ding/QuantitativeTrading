@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Price Watcher - Watch List{% endblock %}
+{% block title %}Price alerter - alert List{% endblock %}
 {% block content %}
-    <h1 class="text-3xl font-bold mb-4">Price Watcher - Watch List</h1>
+    <h1 class="text-3xl font-bold mb-4">Price alerter - alert List</h1>
 
     <table class="w-full border-collapse">
       <thead>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for price in watch_list %}
+        {% for price in alert_list %}
           <tr class="border-b border-gray-200 hover:bg-gray-100">
             <td class="py-4 px-6">{{ loop.index }}</td>
             <td class="py-4 px-6">{{ price['crypto'] }}</td>

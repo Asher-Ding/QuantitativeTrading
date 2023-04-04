@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Price Watcher{% endblock %}
+{% block title %}Price alerter{% endblock %}
 
 {% block content %}
     <div class="container mx-auto my-6">
-        <h1 class="text-3xl mb-4">Price Watcher</h1>
+        <h1 class="text-3xl mb-4">Price alerter</h1>
 
         <div class="w-full max-w-sm mx-auto">
-            <form action="{{ url_for('watch_list') }}" method="GET">
+            <form action="{{ url_for('alert_list') }}" method="GET">
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="crypto">
                         Crypto:
@@ -31,7 +31,7 @@
 
                 <div class="flex items-center justify-between">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Watch
+                        alert
                     </button>
                 </div>
             </form>

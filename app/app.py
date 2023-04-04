@@ -11,18 +11,18 @@
 '''
 
 from flask import Flask, render_template, request, redirect
-# from price_watcher import PriceWatcher
+# from price_alerter import Pricealerter
 from utils.sqlitedb import SqliteDataBase
-from blueprints import diary_blueprint, watch_blueprint
+from blueprints import diary_blueprint, alert_blueprint
 
 app = Flask(__name__)
 
 # Register blueprints
 app.register_blueprint(diary_blueprint)
-app.register_blueprint(watch_blueprint)
+app.register_blueprint(alert_blueprint)
 
 
-# price_watcher = PriceWatcher()
+# price_alerter = Pricealerter()
 
 DATABASE = 'app/database/diary.db'
 
@@ -33,9 +33,9 @@ navbar_links = {
         'View Diary': '/diary',
         'Diary List': '/diary_list'
     },
-    'Watch': {
-        'Watch': '/watch',
-        'Watch List': '/watch_list'
+    'alert': {
+        'alert': '/alert',
+        'alert List': '/alert_list'
     }
 }
 
@@ -51,12 +51,12 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/watch', methods=['GET'])
-def watch():
+@app.route('/alert', methods=['GET'])
+def alert():
     crypto = request.args.get('crypto')
-    # price_watcher.watch_price(crypto)
+    # price_alerter.alert_price(crypto)
     # return "You are now watcing "+crypto
-    return render_template('watch.html')
+    return render_template('alert.html')
 
 
 @app.route('/submit', methods=['POST'])
@@ -68,10 +68,10 @@ def submit():
     return render_template('submit.html')
 
 
-@app.route('/watch_list')
-def watch_list():
-    # watch_list = price_watcher.get_watch_list()
-    return render_template('watch_list.html', watch_list=watch_list)
+@app.route('/alert_list')
+def alert_list():
+    # alert_list = price_alerter.get_alert_list()
+    return render_template('alert_list.html', alert_list=alert_list)
 
 
 # diary page

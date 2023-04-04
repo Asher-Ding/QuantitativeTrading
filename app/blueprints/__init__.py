@@ -13,9 +13,9 @@
 from flask import Blueprint
 
 diary_blueprint = Blueprint('diary', __name__)
-watch_blueprint = Blueprint('watch', __name__)
+alert_blueprint = Blueprint('alert', __name__)
 sell_blueprint = Blueprint('sell', __name__)
 buy_blueprint = Blueprint('buy', __name__)
 quote_blueprint = Blueprint('quote', __name__)
 
-from . import diary, watch
+from . import diary, alert
