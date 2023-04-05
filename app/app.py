@@ -12,11 +12,11 @@
 
 from flask import Flask, current_app
 from config.setting import APP_CONFIG, NAVBAR_LINKS
-# Import blueprints
-from views import main_pages
-from error_pages import error_pages
-from diary_pages import diary_pages
-from alert_pages import alert_pages
+# Import Modules Which Contain Blueprints
+from modules.main_pages import main_pages
+from modules.error_pages import error_pages
+from modules.diary_pages import diary_pages
+from modules.alert_pages import alert_pages
 
 app = Flask(__name__)
 # 加载配置文件

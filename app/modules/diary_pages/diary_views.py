@@ -10,9 +10,8 @@
 @Desc    :   包含与蓝图相关的所有路由和视图函数代码。视图函数处理从浏览器发送到应用程序的 HTTP 请求。这个文件还定义了与此蓝图相关的其他功能，比如表单类、过滤器等。
 '''
 
-from flask import render_template, request, redirect
-from utils.sqlitedb import SqliteDataBase
-from diary_pages import diary_pages
+from flask import render_template, request
+from . import diary_pages
 
 
 @diary_pages.route('/diary')

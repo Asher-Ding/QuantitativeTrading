@@ -16,4 +16,4 @@ diary_pages = Blueprint('diary_pages', __name__, template_folder='./templates')
 
 # Path: app/diary_pages/error_views.py
 # 导入所需的库，原因是在蓝图中使用这些库时，需要使用蓝图的上下文，而不是应用的上下文
-from diary_pages import diary_views
+from . import diary_views

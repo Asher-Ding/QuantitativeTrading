@@ -9,11 +9,8 @@
 @License :   (C)Copyright 2023-2023, Asher Ding
 @Desc    :   一些全局的或者通用的视图函数，比如首页、关于页面等，或者其他一些不属于任何蓝图的路由和视图函数。
 '''
-from flask import Blueprint, render_template
-
-# Create a Blueprint object
-main_pages = Blueprint('main_pages', __name__, template_folder='./templates')
-""" main = Blueprint('main', __name__, template_folder='main/templates') """
+from flask import render_template
+from . import main_pages
 
 # Index page
 @main_pages.route('/')
