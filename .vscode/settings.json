@@ -1,5 +1,5 @@
 {   
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "yapf",
     "python.envFile": "${workspaceFolder}/.env",
     "python.testing.pytestEnabled": true,
     "terminal.integrated.env.osx": {
