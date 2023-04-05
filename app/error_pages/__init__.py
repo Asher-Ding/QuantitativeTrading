@@ -16,12 +16,12 @@
 from flask import Blueprint
 
 # 声明蓝图对象并设置其名称
-error_bp = Blueprint('views',
+error_pages = Blueprint('error_pages',
                      __name__,
                      template_folder='./templates')
-""" error_bp = Blueprint('views', __name__, template_folder='error_pages/templates')
+""" error_pages = Blueprint('error_pages', __name__, template_folder='error_pages/templates')
 @Desc: 将可选的 template_folder 参数设置为包含错误页面模板的目录路径，以便 Flask 能够正确地加载它们
 """
 
-from . import views
+from . import error_views
 # 定义该蓝图所需的所有视图函数和 URL 规则，这些规则都会自动添加到蓝图对象的 routes 属性中 

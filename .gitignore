@@ -1,26 +1,47 @@
-.DS_Store
+# Python
 *.pyc
-__pycache__
-dist
-build
-docs
-docs/build
-docs/source/reference/services
+__pycache__/
+.venv/
+env/
 
-# virtualenv names
-.venv
+# Environments
+.env
 
-# important: config
-app/config.py
+# IDEs
+.idea/
+# Exclude all files in .vscode directory except for settings.json
+/.vscode/*
+!/.vscode/settings.json
 
-# logs
-logs/
+# Compiled source #
+###################
+app/static/css/style.css
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# database
-app/database/**
-
-# node_modules
+# Packages #
+############
 node_modules
 
-# style.css is generated from tailwind.css
-app/static/css/style.css
+# Logs and databases #
+######################
+*.log
+*.sqlite3
+
+# OS generated files #
+######################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Testing #
+.pytest_cache/
+
+
+
+
+

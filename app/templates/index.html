@@ -2,22 +2,4 @@
 
 {% block content %}
   <h1 class="text-4xl font-bold mb-4">首页</h1>
-  <form method="post" action="{{ url_for('submit') }}">
-    <div class="mb-6">
-      <label for="date" class="block text-gray-700 font-bold mb-2">日期：</label>
-      <input type="text" id="date" name="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-    </div>
-
-    <div class="mb-6">
-      <label for="price" class="block text-gray-700 font-bold mb-2">价格：</label>
-      <input type="text" id="price" name="price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-    </div>
-
-    <div class="mb-6">
-      <label for="remarks" class="block text-gray-700 font-bold mb-2">备注：</label>
-      <textarea id="remarks" name="remarks" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-    </div>
-
-    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">提交</button>
-  </form>
 {% endblock %}

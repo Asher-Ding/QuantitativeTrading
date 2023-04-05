@@ -1,10 +1,10 @@
-from . import error_bp
+from . import error_pages
 from flask import render_template
 
-@error_bp.app_errorhandler(404)
+@error_pages.app_errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@error_bp.app_errorhandler(500)
+@error_pages.app_errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
