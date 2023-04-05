@@ -14,6 +14,7 @@ import os
 from dotenv import load_dotenv
 from .navbar_links import NAVBAR_LINKS
 from .url_config import OKX_BASE_URL, PUBLIC_URI, PRIVATE_URI, WEBHOOK_URL
+from .app_config import APP_CONFIG
 
 load_dotenv()
 # Define your configuration variables here

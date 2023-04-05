@@ -11,7 +11,7 @@
 '''
 
 from flask import Flask, current_app
-from config.app_config import APP_CONFIG
+from config.setting import APP_CONFIG, NAVBAR_LINKS
 # Import blueprints
 from views import main_pages
 from error_pages import error_pages
@@ -28,13 +28,12 @@ app.register_blueprint(diary_pages)
 app.register_blueprint(alert_pages)
 
 
-
-navbar_links = current_app.config['NAVBAR_LINKS']
 # 通过使用Flask上下文处理函数来自动传递菜单变量，避免每个路由函数都要传递这个变量
 @app.context_processor  # 是否可以理解为定义了一个全局变量
 def inject_navbar_links():
     """ Inject navbar links into all templates """
-    return dict(navbar_links)
+    return dict(navbar_links=NAVBAR_LINKS)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
