@@ -32,9 +32,14 @@ git clone --recursive https://github.com/Asher-Ding/QuantitativeTrading.git
 npx tailwindcss-cli@latest build -i ./app/static/css/tailwind.css -o ./app/static/css/style.css
 ```
 
-```python
-python setup.py install 
+```bash
+cd app
+python app.py
 ```
+
+<!-- ```python
+python setup.py install 
+``` -->
 
 ## 使用说明
 
@@ -76,7 +81,7 @@ python setup.py install
 ## 相关资源
 [如何打包. 官方文档](https://packaging.python.org/en/latest/)
 
-## 社区
+<!-- ## 社区 -->
 
-## 版权声明
+<!-- ## 版权声明 -->
 
