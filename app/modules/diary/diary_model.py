@@ -30,3 +30,25 @@ class Diary(Base):
     leverage = Column(Integer)
     margin = Column(Float)
     price = Column(Float)
+
+# 以下是使用SQLAlchemy ORM的方式来定义模型
+class DiaryEntry:
+    def __init__(self, cTime, ccy, closeAvgPx, closeTotalPos, instId, instType, lever, mgnMode, openAvgPx, openMaxPos, pnl, pnlRatio, posId, direction, triggerPx, type, uTime, uly):
+        self.cTime = cTime
+        self.ccy = ccy
+        self.closeAvgPx = closeAvgPx
+        self.closeTotalPos = closeTotalPos
+        self.instId = instId
+        self.instType = instType
+        self.lever = lever
+        self.mgnMode = mgnMode
+        self.openAvgPx = openAvgPx
+        self.openMaxPos = openMaxPos
+        self.pnl = pnl
+        self.pnlRatio = pnlRatio
+        self.posId = posId
+        self.direction = direction
+        self.triggerPx = triggerPx
+        self.type = type
+        self.uTime = uTime
+        self.uly = uly

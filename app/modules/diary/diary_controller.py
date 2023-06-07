@@ -15,6 +15,7 @@ from flask import render_template, request
 from . import diary_pages
 from .diary_model import Diary
 # from app import db # 不能这样导入，会报错
+from api.okx import get_positions_history
 
 @diary_pages.route('/diary')
 def diary():
@@ -40,6 +41,12 @@ def add_diary():
 # Select all diary entries
 @diary_pages.route('/diary_list', methods=["GET"])
 def diary_list():
+    # get_positions_history()
+    # [ ]增加model存储数据，增加api获取数据
+    #     1. 定义model
+
+
     diaries = db.session.query(Diary).all()
     return render_template('diary_list.html', diaries=diaries)
+
 

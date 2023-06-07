@@ -8,6 +8,7 @@
 @Contact :   asherding@icloud.com
 @License :   (C)Copyright 2023-2023, Asher Ding
 @Desc    :   将所有配置集中存储在 settings.py 中，并可以将其按功能分组到单独的 .py 文件中。这样做可以使代码更易于维护和管理，并提高可重用性和可扩展性。
+             使用方法：```from config.setting import xxx,xxx ``` 
 '''
 import os
 # pip install python-dotenv
@@ -26,7 +27,7 @@ PASSPHRASE = os.getenv('PASSPHRASE')
 # DingTalk Robot
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 # 添加Token生成新的WEBHOOK_URL
-WEBHOOK_URL = WEBHOOK_URL + ACCESS_TOKEN
+WEBHOOK_URL = WEBHOOK_URL + ACCESS_TOKEN # type: ignore
 
 
 
