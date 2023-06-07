@@ -1,6 +1,7 @@
 import sqlite3
 import pytest
-from app.models.diary import Diary
+# Import the Diary class from the app.modules.diary module
+from app.modules.diary.diary_controller import Diary
 
 # Fixture to create a Diary object for each test case
 @pytest.fixture
@@ -9,34 +10,34 @@ def diary():
     yield diary
     diary.close()
 
-# Test create_entry() method
-def test_create_entry(diary):
-    title = 'Test Entry'
-    content = 'This is a test entry.'
-    entry_id = diary.create_entry(title, content)
-    assert entry_id == 1
-
-# Test read_entries() method
-def test_read_entries(diary):
-    # Insert two entries into the database
-    diary.create_entry('Entry 1', 'This is entry 1.')
-    diary.create_entry('Entry 2', 'This is entry 2.')
-    entries = diary.read_entries()
-    assert len(entries) == 2
-    assert entries[1][1] == 'Entry 2'  # Check that the entries are ordered by created_at DESC
-
-# Test update_entry() method
-def test_update_entry(diary):
-    title = 'Test Entry'
-    content = 'This is a test entry.'
-    diary.create_entry(title, content)
-    diary.update_entry(1, 'New Title', 'New Content')
-    entries = diary.read_entries()
-    assert entries[0][1:3] == ('New Title', 'New Content')
-
-# Test delete_entry() method
-def test_delete_entry(diary):
-    diary.create_entry('Entry to delete', 'This entry will be deleted.')
-    diary.delete_entry(1)
-    entries = diary.read_entries()
-    assert len(entries) == 0
+# Test the create_table() method
+def test_create_table(diary):
+    diary.create_table()
+    # Get the names of all tables in the database
+    diary.cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    tables = diary.cur.fetchall()
+    # Check that the 'diary' table exists
+    assert ('diary',) in tables
+    
+# Test the insert() method
+def test_insert(diary):
+    diary.create_table()
+    # Insert a row into the 'diary' table
+    diary.insert('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)
+    # Select all rows from the 'diary' table
+    diary.cur.execute("SELECT * FROM diary")
+    rows = diary.cur.fetchall()
+    # Check that the row was inserted
+    assert rows[0] == ('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)
+    
+# Test the select_all() method
+def test_select_all(diary):
+    diary.create_table()
+    # Insert two rows into the 'diary' table
+    diary.insert('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)
+    diary.insert('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)
+    # Select all rows from the 'diary' table
+    rows = diary.select_all()
+    # Check that the two rows were inserted
+    assert rows[0] == ('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)
+    assert rows[1] == ('2021-01-01 00:00:00', 'open', 0.0, 0.0, 'long', 1, 0.0, 0.0, 1)

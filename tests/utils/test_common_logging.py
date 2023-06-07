@@ -2,7 +2,7 @@ import os
 import logging
 import shutil
 
-from app.utils.common_logging import setup_logging
+from app.modules.common.logging import setup_logging
 
 
 def test_setup_logging():

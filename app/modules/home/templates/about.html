@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="markdown">
+    {{ content | safe }}
+    <!-- 使用 safe 过滤器是必要的，以确保HTML文本不被转义 -->
+  </div>
+{% endblock %}

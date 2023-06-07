@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Diary List{% endblock %}
+{% block content %}
+
+{% if diaries|length == 0 %}
+<p>No diaries found.</p>
+{% else %}
+<h1>Diary List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Mood</th>
+            <th>Rating</th>
+            <th>Temperature</th>
+            <th>Weather</th>
+            <th>Category ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for diary in diaries %}
+        <tr>
+            <td>{{ diary.date }}</td>
+            <td>{{ diary.status }}</td>
+            <td>{{ diary.latitude }}, {{ diary.longitude }}</td>
+            <td>{{ diary.mood }}</td>
+            <td>{{ diary.rating }}</td>
+            <td>{{ diary.temp }}</td>
+            <td>{{ diary.weather }}</td>
+            <td>{{ diary.category_id }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -11,7 +11,7 @@
 '''
 
 import pytest
-from app.utils.sqlitedb import SqliteDataBase
+from app.modules.common.database import SqliteDataBase
 
 class TestSqliteDataBase:
     # pytest fixture to create database object before each test case.

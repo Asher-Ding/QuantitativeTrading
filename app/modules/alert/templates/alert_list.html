@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Price alerter - alert List{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold mb-4">Price alerter - alert List</h1>
+
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="text-left bg-gray-100 uppercase text-sm leading-normal border-b border-gray-300">
+          <th class="py-3 px-6 font-semibold">#</th>
+          <th class="py-3 px-6 font-semibold">Crypto</th>
+          <th class="py-3 px-6 font-semibold">Currency</th>
+          <th class="py-3 px-6 font-semibold">Target Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for price in alert_list %}
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-4 px-6">{{ loop.index }}</td>
+            <td class="py-4 px-6">{{ price['crypto'] }}</td>
+            <td class="py-4 px-6">{{ price['currency'] }}</td>
+            <td class="py-4 px-6">{{ price['target_price'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

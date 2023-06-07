@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-xl font-bold mb-4">多个输入的页面</h1>
+
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+  function onSubmit(event) {
+    if (confirm("确认提交？") == false) return false; // 确认提交
+
+    event.preventDefault();// 阻止表单默认行为
+    
+    var successMessageBox = document.getElementById("success-message");
+    successMessageBox.classList.remove("hidden");
+    setTimeout(hideSuccessMessage, 3000); // 隐藏弹窗，时间设定为 3 秒
+
+    const form = event.target.form;
+    const data = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method,
+      body: data,
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  function hideSuccessMessage() {
+    var successMessageBox = document.getElementById("success-message");
+    successMessageBox.classList.add("hidden");
+  }
+
+</script>
+{% endblock %}
